@@ -1,18 +1,4 @@
 package com.cn.dao;
-/**
-
-* Copyright (C), 03.06-03.11
-
-* FileName: SelectionStudentDao.java
-
-* ÓÃÀ´¶Ô½ÌÊ¦²éÕÒ
-
-* @author Lipeishan
-* @Date  2020.03.08
-
-* @version 1.00
-
-*/
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -27,9 +13,9 @@ import com.cn.pojo.Studentinfo;
 import com.cn.pojo.Teacher;
 
 public class StudentDao {
-	/** ´´½¨Statement¶ÔÏó */
+	/** åˆ›å»ºStatementå¯¹è±¡ */
 	Statement stmt;
-	/** ´´½¨½á¹û¼¯ */
+	/** åˆ›å»ºç»“æœé›† */
 	ResultSet rs;
 
 	public Statement getStmt() {
@@ -38,9 +24,9 @@ public class StudentDao {
 
 	/**
 	 * 
-	 * ½¨Á¢µ½eps_management.sqlµÄÁ¬½Ó
+	 * å»ºç«‹åˆ°eps_management.sqlçš„è¿æ¥
 	 * 
-	 * @param con Á¬½ÓÊı¾İ¿â
+	 * @param con è¿æ¥æ•°æ®åº“
 	 * 
 	 */
 	public StudentDao(Connection con) {
@@ -50,15 +36,6 @@ public class StudentDao {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * 
-	 * Ìí¼ÓÑ§ÉúĞÅÏ¢
-	 * 
-	 * @param con     Á¬½ÓÊı¾İ¿â
-	 * @param student Ìí¼ÓStudentÀàÊµÀı
-	 * @return ·µ»Ø½á¹û¼¯
-	 */
 	public int AddStudent(Connection con, Student student) throws SQLException {
 		String sql = "insert into student value(?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -71,14 +48,7 @@ public class StudentDao {
 
 	}
 
-	/**
-	 * 
-	 * Ìí¼Ó½ÌÊ¦·ÀÒßĞÅÏ¢
-	 * 
-	 * @param con   Á¬½ÓÊı¾İ¿â
-	 * @param sinfo Ìí¼ÓStudentInfoÀàÊµÀı
-	 * @return ·µ»Ø½á¹û¼¯
-	 */
+	
 	public int AddStudentInfo(Connection con, Studentinfo sinfo) throws SQLException {
 		String sql = "insert into stu_info value(?, ?, ?,?, ?)";
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -90,22 +60,17 @@ public class StudentDao {
 		return pstmt.executeUpdate();
 	}
 
-	/** ÏÔÊ¾ËùÓĞÑ§ÉúĞÅÏ¢ */
+	/** æ˜¾ç¤ºæ‰€æœ‰å­¦ç”Ÿä¿¡æ¯ */
 	public void selectAllStudent() throws SQLException {
 		String sql = "select * from student s, stu_info s1 where s.student_id = s1.s_id order by s.student_id";
 		rs = stmt.executeQuery(sql);
-		System.out.println("Ñ§ÉúĞÅÏ¢");
-		System.out.println("Ñ§ºÅ\tĞÕÃû\tĞÔ±ğ\tËù´¦Ê¡·İ\tÊĞÇø\tµ±ÈÕÎÂ¶È\tÖ¢×´\tÌî±¨Ê±¼ä\t\tÊÇ·ñÈ·Õï\t");
+		System.out.println("å­¦ç”Ÿä¿¡æ¯");
+		System.out.println("å­¦å·\tå§“å\tæ€§åˆ«\tæ‰€å¤„çœä»½\tå¸‚åŒº\tå½“æ—¥æ¸©åº¦\tç—‡çŠ¶\tå¡«æŠ¥æ—¶é—´\t\tæ˜¯å¦ç¡®è¯Š\t");
 		display();
 
 	}
 
-	/**
-	 * ¸ù¾İ¹¤ºÅ²éÑ¯ĞÅÏ¢
-	 * 
-	 * @param con        Á¬½ÓÊı¾İ¿â
-	 * @param student_id Õë¶Ôstudent_id½øĞĞ²éÑ¯
-	 */
+	
 
 	public void selectStudentById(Connection con, int student_id) throws SQLException {
 		String sql = "select * from student s, stu_info s1 where s.student_id = s1.s_id and s.student_id=?";
@@ -124,11 +89,7 @@ public class StudentDao {
 		display();
 	}
 
-	/**
-	 * ´ÓÊı¾İ¶Á³ö²éÑ¯½á¹û
-	 * 
-	 * @throws Å×³öSQLException
-	 */
+	
 	private void display() throws SQLException {
 		// TODO Auto-generated method stub
 		while (rs.next()) {
