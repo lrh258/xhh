@@ -1,19 +1,5 @@
 package com.cn.dao;
 
-/**
-
-* Copyright (C), 03.06-03.11
-
-* FileName: SelectionTeacherDao.java
-
-* ÓÃÀ´¶Ô½ÌÊ¦²éÕÒ
-
-* @author Lipeishan
-* @Date  2020.03.07
-
-* @version 1.00
-
-*/
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,11 +11,11 @@ import java.util.Date;
 import com.cn.pojo.Teacher;
 import com.cn.pojo.Teacherinfo;
 
-//½ÌÊ¦²éÑ¯
+//æ•™å¸ˆæŸ¥è¯¢
 public class TeacherDao {
-	/** ´´½¨Statement¶ÔÏó */
+	/** åˆ›å»ºStatementå¯¹è±¡ */
 	Statement stmt;
-	/** ´´½¨½á¹û¼¯ */
+	/** åˆ›å»ºç»“æœé›† */
 	ResultSet rs;
 
 	public Statement getStmt() {
@@ -45,14 +31,6 @@ public class TeacherDao {
 		}
 	}
 
-	/**
-	 * 
-	 * Ìí¼Ó½ÌÊ¦ĞÅÏ¢
-	 * 
-	 * @param con     Á¬½ÓÊı¾İ¿â
-	 * @param teacher Ìí¼ÓTeacherÀàÊµÀı
-	 * @return ·µ»Ø½á¹û¼¯
-	 */
 	public int AddTeacher(Connection con, Teacher teacher) throws SQLException {
 		String sql = "insert into teacher value(?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -64,15 +42,6 @@ public class TeacherDao {
 		return pstmt.executeUpdate();
 	}
 
-	/**
-	 * 
-	 * Ìí¼Ó½ÌÊ¦·ÀÒßĞÅÏ¢
-	 * 
-	 * @param con   Á¬½ÓÊı¾İ¿â
-	 * @param tinfo Ìí¼ÓTeacherinfoÀàÊµÀı
-	 * @return ·µ»Ø½á¹û¼¯
-	 * 
-	 */
 	public int AddTeacherInfo(Connection con, Teacherinfo tinfo) throws SQLException {
 		String sql = "insert into teacher_info value(?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -94,20 +63,16 @@ public class TeacherDao {
 		display();
 	}
 
-	/** ÏÔÊ¾ËùÓĞ½ÌÊ¦ĞÅÏ¢ */
+	/** æ˜¾ç¤ºæ‰€æœ‰æ•™å¸ˆä¿¡æ¯ */
 	public void selectAllTeacher() throws SQLException {
 		String sql = "select * from teacher t, teacher_info t1 where t.teacher_id = t1.teacher_id order by t.teacher_id";
 		rs = stmt.executeQuery(sql);
-		System.out.println("½ÌÊ¦ĞÅÏ¢");
-		System.out.println("¹¤ºÅ\tĞÕÃû\tĞÔ±ğ\tËù´¦Ê¡·İ\tÊĞÇø\tµ±ÈÕÎÂ¶È\tÖ¢×´\tÌî±¨Ê±¼ä\t\tÊÇ·ñÈ·Õï\t");
+		System.out.println("æ•™å¸ˆä¿¡æ¯");
+		System.out.println("å·¥å·\tå§“å\tæ€§åˆ«\tæ‰€å¤„çœä»½\tå¸‚åŒº\tå½“æ—¥æ¸©åº¦\tç—‡çŠ¶\tå¡«æŠ¥æ—¶é—´\t\tæ˜¯å¦ç¡®è¯Š\t");
 		display();
 	}
 
-	/**
-	 * ¸ù¾İ¹¤ºÅ²éÑ¯ĞÅÏ¢
-	 *
-
-	 */
+	
 	public void selectTeacherById(Connection con, int teacher_id) throws SQLException {
 		String sql = "select * from teacher t, teacher_info t1 where t.teacher_id = t1.teacher_id and t.teacher_id=?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -116,11 +81,6 @@ public class TeacherDao {
 		display();
 	}
 
-	/**
-	 * ´ÓÊı¾İ¶Á³ö²éÑ¯½á¹û²¢Êä³ö
-	 * 
-	 * @throws Å×³öSQLException
-	 */
 	private void display() throws SQLException {
 		// TODO Auto-generated method stub
 		while (rs.next()) {
