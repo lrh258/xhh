@@ -1,5 +1,6 @@
 package com.cn.dao;
 
+
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,11 +12,11 @@ import java.util.Date;
 import com.cn.pojo.Teacher;
 import com.cn.pojo.Teacherinfo;
 
-//æ•™å¸ˆæŸ¥è¯¢
+//½ÌÊ¦²éÑ¯
 public class TeacherDao {
-	/** åˆ›å»ºStatementå¯¹è±¡ */
+	/** ´´½¨Statement¶ÔÏó */
 	Statement stmt;
-	/** åˆ›å»ºç»“æœé›† */
+	/** ´´½¨½á¹û¼¯ */
 	ResultSet rs;
 
 	public Statement getStmt() {
@@ -31,6 +32,7 @@ public class TeacherDao {
 		}
 	}
 
+	
 	public int AddTeacher(Connection con, Teacher teacher) throws SQLException {
 		String sql = "insert into teacher value(?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -42,6 +44,7 @@ public class TeacherDao {
 		return pstmt.executeUpdate();
 	}
 
+	
 	public int AddTeacherInfo(Connection con, Teacherinfo tinfo) throws SQLException {
 		String sql = "insert into teacher_info value(?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -63,12 +66,12 @@ public class TeacherDao {
 		display();
 	}
 
-	/** æ˜¾ç¤ºæ‰€æœ‰æ•™å¸ˆä¿¡æ¯ */
+	/** ÏÔÊ¾ËùÓĞ½ÌÊ¦ĞÅÏ¢ */
 	public void selectAllTeacher() throws SQLException {
 		String sql = "select * from teacher t, teacher_info t1 where t.teacher_id = t1.teacher_id order by t.teacher_id";
 		rs = stmt.executeQuery(sql);
-		System.out.println("æ•™å¸ˆä¿¡æ¯");
-		System.out.println("å·¥å·\tå§“å\tæ€§åˆ«\tæ‰€å¤„çœä»½\tå¸‚åŒº\tå½“æ—¥æ¸©åº¦\tç—‡çŠ¶\tå¡«æŠ¥æ—¶é—´\t\tæ˜¯å¦ç¡®è¯Š\t");
+		System.out.println("½ÌÊ¦ĞÅÏ¢");
+		System.out.println("¹¤ºÅ\tĞÕÃû\tĞÔ±ğ\tËù´¦Ê¡·İ\tÊĞÇø\tµ±ÈÕÎÂ¶È\tÖ¢×´\tÌî±¨Ê±¼ä\t\tÊÇ·ñÈ·Õï\t");
 		display();
 	}
 
@@ -81,6 +84,7 @@ public class TeacherDao {
 		display();
 	}
 
+	
 	private void display() throws SQLException {
 		// TODO Auto-generated method stub
 		while (rs.next()) {

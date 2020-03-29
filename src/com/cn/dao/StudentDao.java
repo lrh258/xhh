@@ -1,5 +1,6 @@
 package com.cn.dao;
 
+
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,22 +14,16 @@ import com.cn.pojo.Studentinfo;
 import com.cn.pojo.Teacher;
 
 public class StudentDao {
-	/** åˆ›å»ºStatementå¯¹è±¡ */
+	/** ´´½¨Statement¶ÔÏó */
 	Statement stmt;
-	/** åˆ›å»ºç»“æœé›† */
+	/** ´´½¨½á¹û¼¯ */
 	ResultSet rs;
 
 	public Statement getStmt() {
 		return stmt;
 	}
 
-	/**
-	 * 
-	 * å»ºç«‹åˆ°eps_management.sqlçš„è¿æ¥
-	 * 
-	 * @param con è¿æ¥æ•°æ®åº“
-	 * 
-	 */
+	
 	public StudentDao(Connection con) {
 		try {
 			stmt = con.createStatement();
@@ -36,6 +31,8 @@ public class StudentDao {
 			e.printStackTrace();
 		}
 	}
+
+	
 	public int AddStudent(Connection con, Student student) throws SQLException {
 		String sql = "insert into student value(?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -60,17 +57,22 @@ public class StudentDao {
 		return pstmt.executeUpdate();
 	}
 
-	/** æ˜¾ç¤ºæ‰€æœ‰å­¦ç”Ÿä¿¡æ¯ */
+	/** ÏÔÊ¾ËùÓĞÑ§ÉúĞÅÏ¢ */
 	public void selectAllStudent() throws SQLException {
 		String sql = "select * from student s, stu_info s1 where s.student_id = s1.s_id order by s.student_id";
 		rs = stmt.executeQuery(sql);
-		System.out.println("å­¦ç”Ÿä¿¡æ¯");
-		System.out.println("å­¦å·\tå§“å\tæ€§åˆ«\tæ‰€å¤„çœä»½\tå¸‚åŒº\tå½“æ—¥æ¸©åº¦\tç—‡çŠ¶\tå¡«æŠ¥æ—¶é—´\t\tæ˜¯å¦ç¡®è¯Š\t");
+		System.out.println("Ñ§ÉúĞÅÏ¢");
+		System.out.println("Ñ§ºÅ\tĞÕÃû\tĞÔ±ğ\tËù´¦Ê¡·İ\tÊĞÇø\tµ±ÈÕÎÂ¶È\tÖ¢×´\tÌî±¨Ê±¼ä\t\tÊÇ·ñÈ·Õï\t");
 		display();
 
 	}
 
-	
+	/**
+	 * ¸ù¾İ¹¤ºÅ²éÑ¯ĞÅÏ¢
+	 * 
+	 * @param con        Á¬½ÓÊı¾İ¿â
+	 * @param student_id Õë¶Ôstudent_id½øĞĞ²éÑ¯
+	 */
 
 	public void selectStudentById(Connection con, int student_id) throws SQLException {
 		String sql = "select * from student s, stu_info s1 where s.student_id = s1.s_id and s.student_id=?";
@@ -89,7 +91,11 @@ public class StudentDao {
 		display();
 	}
 
-	
+	/**
+	 * ´ÓÊı¾İ¶Á³ö²éÑ¯½á¹û
+	 * 
+	 * @throws Å×³öSQLException
+	 */
 	private void display() throws SQLException {
 		// TODO Auto-generated method stub
 		while (rs.next()) {
